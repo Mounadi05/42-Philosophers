@@ -6,7 +6,7 @@
 /*   By: amounadi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 03:28:35 by amounadi          #+#    #+#             */
-/*   Updated: 2022/03/20 04:29:05 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/03/20 05:28:25 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_var
 	long long unsigned  t;
 	pthread_mutex_t print;
 }t_var;
-
 typedef struct s_philo
 {
 	pthread_t		p;
@@ -52,11 +51,10 @@ long long unsigned	ft_time(t_philo *philo);
 int					ft_check(t_philo *philo);
 void				ft_sleep(int time);
 void				*ft_routine(void *var);
-void				ft_routine_plus(t_philo *philo);
-void				print_message(t_philo * philo, int a);
+void					ft_routine_plus(t_philo *philo);
+int					print_message(t_philo * philo, int a);
 t_philo				*ft_lstnew(int i, t_var *table, int a);
 t_philo				*ft_lstlast(t_philo *lst);
 void				ft_lstadd_back(t_philo **lst, t_philo *new);
 int					ft_atoi(char *str);
-
 #endif

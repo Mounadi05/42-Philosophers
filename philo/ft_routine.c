@@ -6,29 +6,40 @@
 /*   By: amounadi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:41:35 by amounadi          #+#    #+#             */
-/*   Updated: 2022/03/19 03:52:00 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/03/20 05:28:23 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	print_message_plus(t_philo *philo, int a)
+int	print_message_plus(t_philo *philo, int a)
 {
 	if (a == 3 && philo->table->lock)
 	{
 		pthread_mutex_lock(&philo->table->print);
+		if (!philo->table->lock)
+		{
+			pthread_mutex_unlock(&philo->table->print);
+			return (0);
+		}
 		printf("%llu ms : philo %d is sleeping\n", ft_time(philo), philo->ip);
 		pthread_mutex_unlock(&philo->table->print);
 	}
 	else if (a == 4 && philo->table->lock)
 	{
 		pthread_mutex_lock(&philo->table->print);
+		if (!philo->table->lock)
+		{
+			pthread_mutex_unlock(&philo->table->print);
+			return (0);
+		}
 		printf("%llu ms : philo %d is thinking\n", ft_time(philo), philo->ip);
 		pthread_mutex_unlock(&philo->table->print);
 	}
+	return (1);
 }
 
-void	print_message(t_philo *philo, int a)
+int		print_message(t_philo *philo, int a)
 {
 	if (a == 0 && philo->table->lock)
 	{	
@@ -51,7 +62,9 @@ void	print_message(t_philo *philo, int a)
 		pthread_mutex_unlock(&philo->table->print);
 	}
 	else
-		print_message_plus(philo, a);
+		if(!print_message_plus(philo, a))
+			return (0);
+	return (1);
 }
 
 void	ft_routine_plus(t_philo *philo)
@@ -67,11 +80,15 @@ void	ft_routine_plus(t_philo *philo)
 		usleep(30);
 		return ;
 	}
-	print_message(philo, 3);
+	if(!print_message(philo, 3))
+		return ;
 	ft_sleep(philo->table->tts);
-	print_message(philo, 4);
 	philo->ttd = ft_time(philo) +  philo->table->ttd
 		- philo->table->tts - philo->table->tte;
+	if (ft_check(philo))
+		return ;
+	if (!print_message(philo, 4))
+		return ;
 }
 
 void	*ft_routine(void *var)
@@ -79,7 +96,7 @@ void	*ft_routine(void *var)
 	t_philo *philo;
 
 	philo = (t_philo *)var;
-	while (philo->e && philo->is_alive)
+	while (philo->e && philo->is_alive && !ft_check(philo))
 	{
 		pthread_mutex_lock(&philo->fork);
 		if (ft_check(philo))
