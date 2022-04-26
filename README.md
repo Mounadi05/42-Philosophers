@@ -1,11 +1,4 @@
 # Philosophers - 42 school project
-
-<p align="center">
-	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/ael-bekk/Philosopher?color=blueviolet" />
-	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/ael-bekk/Philosopher?color=blue" />
-	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ael-bekk/Philosopher?color=brightgreen" />
-</p>
-
 This project is a training to multi-threads/multi-process programming with the use of mutex and semaphore.
 It contains 2 different programs simulating a twist of the famous Dining Philosophers problem, all with the same basic rules.
 This project is also a good lesson in C optimization as we need to save every bit of CPU usage we can to ensure the survival of our philosophers.
