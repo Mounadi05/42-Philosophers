@@ -2,7 +2,7 @@ NAME = philo
 
 SRC = philo.c ft_routine.c ft_time.c linkedlist.c parsing.c
 
-FLAGS = -Wextra -Wall -Werror
+FLAGS = -Wextra -Wall -Werror 
 
 OBJ = $(SRC:.c=.o) 
 
@@ -11,13 +11,13 @@ RM = rm -f
 all : $(NAME)
 
 $(NAME) : 	$(OBJ)
-			gcc $(FLGS) $(OBJ) -o $(NAME)
+			gcc $(FLAGS) $(OBJ) -o $(NAME)
 $(.c:.o) :
-			 $(FLGS) $(SRC) -c $<
+			 $(FLAGS) $(SRC) -c $<
 clean:
 			$(RM) $(OBJ)
 
 fclean: 	clean
 			$(RM) $(NAME)
 
-re: 		fclen all
+re: 		fclean all

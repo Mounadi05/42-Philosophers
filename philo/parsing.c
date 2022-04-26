@@ -6,7 +6,7 @@
 /*   By: amounadi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 03:31:15 by amounadi          #+#    #+#             */
-/*   Updated: 2022/03/12 04:09:40 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/04/25 21:54:07 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_not_num(char *str)
 			return (0);
 		i++;
 	}
-	return(1);
+	return (1);
 }
 
 int	ft_atoi(char *str)
@@ -41,5 +41,7 @@ int	ft_atoi(char *str)
 		if (res > MAX_POS)
 			return (-1);
 	}
+	if (res <= 0)
+		return (-1);
 	return (res);
 }
